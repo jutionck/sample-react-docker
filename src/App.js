@@ -1,8 +1,9 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import {getTodos} from '../src/api/todosService'
+import {getTodos, insertTodos} from '../src/api/todosService'
 import Todo from './Todo';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import TodoForm from './TodoForm';
 
 function App() {
 
@@ -22,10 +23,19 @@ function App() {
     })
   }
 
+  const addTodo = data => {
+    return insertTodos(data)
+    .then((res) => {
+      console.log('Todo addes', res);
+    })
+  };
+
+
   return (
     <div className="app">
       <div className="container">
         <h1 className="text-center mb-4">Todo List</h1>
+        {/* <TodoForm addTodo={addTodo} /> */}
         <div>
           {todos.map((todo, index) => (
             <Card>
